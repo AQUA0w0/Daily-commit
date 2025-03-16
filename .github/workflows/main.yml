@@ -21,5 +21,5 @@ jobs:
         run: |
           echo "$(date)" >> log.txt
           git add log.txt
-          git commit -m "Commit automático em $(date)"
-          git push
+          git commit -m "Commit automático em $(date)" || exit 0
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/AQUA0w0/Daily-commit.git main
