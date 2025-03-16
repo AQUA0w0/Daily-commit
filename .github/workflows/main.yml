@@ -1,0 +1,25 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Executa todos os dias à meia-noite UTC
+  workflow_dispatch:  # Permite rodar manualmente também
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Git
+        run: |
+          git config --global user.name "seu-usuario"
+          git config --global user.email "seu-email@exemplo.com"
+
+      - name: Criar e fazer commit
+        run: |
+          echo "$(date)" >> log.txt
+          git add log.txt
+          git commit -m "Commit automático em $(date)"
+          git push
